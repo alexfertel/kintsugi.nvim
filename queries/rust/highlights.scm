@@ -16,9 +16,9 @@
 ] @keyword.modifier
 
 ; In signatures/refs, paint the reference sigil as a modifier keyword so
-; `&mut` follows VS Code Kintsugi's yellow/gold intent.
+; `&mut` keeps the sigil on operator (orange) while `mut` remains gold.
 (reference_expression
-  "&" @keyword.modifier)
+  "&" @operator)
 
 (reference_type
-  "&" @keyword.modifier)
+  "&" @operator)
