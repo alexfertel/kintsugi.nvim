@@ -12,18 +12,42 @@ fi
 run_case() {
   local scheme="$1"
   local style="$2"
+  local script
+  script="$(mktemp)"
+
+  cat > "${script}" <<LUA
+vim.opt.runtimepath:prepend('${ROOT_DIR}')
+require('kintsugi').setup({ style = '${style}', transparent = false, terminal_colors = true })
+vim.cmd.colorscheme('${scheme}')
+
+assert(vim.g.colors_name == '${scheme}', 'colors_name mismatch: ' .. tostring(vim.g.colors_name))
+assert(vim.fn.hlexists('Normal') == 1, 'missing Normal highlight')
+assert(vim.fn.hlexists('@keyword') == 1, 'missing @keyword highlight')
+assert(vim.fn.hlexists('@keyword.type') == 1, 'missing @keyword.type highlight')
+assert(vim.fn.hlexists('@keyword.modifier') == 1, 'missing @keyword.modifier highlight')
+assert(vim.fn.hlexists('@keyword.type.rust') == 1, 'missing @keyword.type.rust highlight')
+assert(vim.fn.hlexists('@keyword.modifier.rust') == 1, 'missing @keyword.modifier.rust highlight')
+
+local ks = vim.api.nvim_get_hl(0, { name = '@keyword.storage', link = false })
+local kt = vim.api.nvim_get_hl(0, { name = '@keyword.type', link = false })
+local km = vim.api.nvim_get_hl(0, { name = '@keyword.modifier', link = false })
+local ktr = vim.api.nvim_get_hl(0, { name = '@keyword.type.rust', link = false })
+local kmr = vim.api.nvim_get_hl(0, { name = '@keyword.modifier.rust', link = false })
+
+assert(ks.fg == kt.fg, '@keyword.type should match @keyword.storage')
+assert(ks.fg == km.fg, '@keyword.modifier should match @keyword.storage')
+assert(ks.fg == ktr.fg, '@keyword.type.rust should match @keyword.storage')
+assert(ks.fg == kmr.fg, '@keyword.modifier.rust should match @keyword.storage')
+
+assert(vim.fn.hlexists('CmpItemAbbr') == 1, 'missing nvim-cmp highlight')
+assert(vim.fn.hlexists('NeoTreeNormal') == 1, 'missing neo-tree highlight')
+assert(type(vim.g.terminal_color_0) == 'string', 'terminal colors not configured')
+LUA
 
   nvim --headless -u NONE -i NONE \
-    "+set rtp^=${ROOT_DIR}" \
-    "+lua require('kintsugi').setup({ style = '${style}', transparent = false, terminal_colors = true })" \
-    "+colorscheme ${scheme}" \
-    "+lua assert(vim.g.colors_name == '${scheme}', 'colors_name mismatch: ' .. tostring(vim.g.colors_name))" \
-    "+lua assert(vim.fn.hlexists('Normal') == 1, 'missing Normal highlight')" \
-    "+lua assert(vim.fn.hlexists('@keyword') == 1, 'missing @keyword highlight')" \
-    "+lua assert(vim.fn.hlexists('CmpItemAbbr') == 1, 'missing nvim-cmp highlight')" \
-    "+lua assert(vim.fn.hlexists('NeoTreeNormal') == 1, 'missing neo-tree highlight')" \
-    "+lua assert(type(vim.g.terminal_color_0) == 'string', 'terminal colors not configured')" \
+    "+lua dofile('${script}')" \
     "+qa"
+  rm -f "${script}"
 }
 
 echo "Running colorscheme load checks..."
