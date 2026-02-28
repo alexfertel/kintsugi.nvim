@@ -213,6 +213,9 @@ local function groups(c, opts)
     ["@lsp.type.interface"] = { link = "@type" },
     ["@lsp.type.keyword"] = { link = "@keyword" },
     ["@lsp.type.keyword.rust"] = { link = "@keyword.type.rust" },
+    ["@lsp.typemod.keyword.declaration.rust"] = { link = "@keyword.type.rust" },
+    ["@lsp.typemod.keyword.mutable.rust"] = { link = "@keyword.modifier.rust" },
+    ["@lsp.typemod.keyword.modification.rust"] = { link = "@keyword.modifier.rust" },
     ["@lsp.type.macro"] = { link = "@constant.macro" },
     ["@lsp.type.method"] = { link = "@function.call" },
     ["@lsp.type.namespace"] = { link = "@namespace" },
@@ -348,6 +351,12 @@ local function groups(c, opts)
     LeapLabelPrimary = { fg = c.bg, bg = c.storage, bold = true },
     LeapLabelSecondary = { fg = c.bg, bg = c.info, bold = true },
     LeapBackdrop = { fg = c.fg_dim },
+
+    -- Rust legacy syntax fallback (when tree-sitter is unavailable/disabled).
+    rustStructure = { fg = c.storage, bold = true },
+    rustTypedef = { fg = c.storage, bold = true },
+    rustStorage = { fg = c.storage, bold = true },
+    rustSigil = { fg = c.storage, bold = true },
 
     NvimTreeNormal = { fg = c.fg, bg = bg_alt },
     NvimTreeNormalNC = { fg = c.fg, bg = bg_alt },
