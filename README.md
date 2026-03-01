@@ -12,6 +12,20 @@ A Neovim port of the Kintsugi VS Code theme.
 - `kintsugi-flared`
 - `kintsugi-light`
 
+## Showcase
+
+### Light
+
+![Kintsugi light variant](./assets/showcase/neovim-light.png)
+
+### Dark
+
+![Kintsugi dark variant](./assets/showcase/neovim-dark.png)
+
+### Flared
+
+![Kintsugi flared variant](./assets/showcase/neovim-flared.png)
+
 ## Built-in Integrations
 
 This colorscheme includes tuned highlight groups for:
