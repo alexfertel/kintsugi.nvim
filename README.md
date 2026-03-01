@@ -1,5 +1,7 @@
 # kintsugi.nvim
 
+![Kintsugi with Berkeley Mono](./assets/showcase/berkeley-mono.png)
+
 A Neovim port of the Kintsugi VS Code theme.
 
 ## Requirements
@@ -14,6 +16,9 @@ A Neovim port of the Kintsugi VS Code theme.
 
 ## Showcase
 
+<details>
+<summary>View screenshots</summary>
+
 ### Light
 
 ![Kintsugi light variant](./assets/showcase/neovim-light.png)
@@ -25,6 +30,8 @@ A Neovim port of the Kintsugi VS Code theme.
 ### Flared
 
 ![Kintsugi flared variant](./assets/showcase/neovim-flared.png)
+
+</details>
 
 ## Built-in Integrations
 
