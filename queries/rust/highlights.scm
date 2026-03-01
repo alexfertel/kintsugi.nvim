@@ -11,8 +11,9 @@
 
 ; Keep mutability markers aligned with the storage keyword color.
 [
-  "mut"
+  "let"
   "ref"
+  (mutable_specifier)
 ] @keyword.modifier
 
 ; In signatures/refs, paint the reference sigil as a modifier keyword so

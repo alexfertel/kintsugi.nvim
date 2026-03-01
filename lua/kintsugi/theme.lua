@@ -137,6 +137,7 @@ local function groups(c, opts)
 
     ["@annotation"] = { fg = c.annotation },
     ["@attribute"] = { fg = c.annotation },
+    ["@attribute.builtin"] = { fg = c.support or c.annotation },
     ["@boolean"] = { fg = c.number },
     ["@character"] = { fg = c.string },
     ["@character.special"] = { fg = c.type },
@@ -152,7 +153,7 @@ local function groups(c, opts)
     ["@diff.minus"] = { fg = c.error },
     ["@diff.delta"] = { fg = c.warn },
     ["@function"] = with_user_style({ fg = c.func }, function_style),
-    ["@function.builtin"] = { fg = c.type },
+    ["@function.builtin"] = { fg = c.support or c.type },
     ["@function.call"] = with_user_style({ fg = c.func }, function_style),
     ["@function.macro"] = { fg = c.preproc, bold = true },
     ["@keyword"] = with_user_style({ fg = c.keyword, bold = true }, keyword_style),
@@ -161,6 +162,11 @@ local function groups(c, opts)
     ["@keyword.directive.define"] = { fg = c.preproc, bold = true },
     ["@keyword.exception"] = with_user_style({ fg = c.keyword, bold = true }, keyword_style),
     ["@keyword.function"] = with_user_style({ fg = c.keyword, bold = true }, keyword_style),
+    -- Match VS Code flared keyword split for parser-specific function keywords.
+    ["@keyword.function.python"] = with_user_style({ fg = c.storage, bold = true }, keyword_style),
+    ["@keyword.function.javascript"] = with_user_style({ fg = c.storage, bold = true }, keyword_style),
+    ["@keyword.function.typescript"] = with_user_style({ fg = c.storage, bold = true }, keyword_style),
+    ["@keyword.function.tsx"] = with_user_style({ fg = c.storage, bold = true }, keyword_style),
     ["@keyword.import"] = with_user_style({ fg = c.keyword, bold = true }, keyword_style),
     ["@keyword.modifier"] = with_user_style({ fg = c.storage, bold = true }, keyword_style),
     ["@keyword.operator"] = { fg = c.operator },
