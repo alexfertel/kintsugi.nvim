@@ -1,6 +1,8 @@
 # kintsugi.nvim
 
-![Kintsugi with Berkeley Mono](./assets/showcase/berkeley-mono.png)
+<p align="center">
+  <img src="./assets/showcase/berkeley-mono.png" alt="Kintsugi with Berkeley Mono" width="760" />
+</p>
 
 A Neovim port of the Kintsugi VS Code theme.
 
